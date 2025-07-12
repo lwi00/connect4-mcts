@@ -1,21 +1,32 @@
-from player import Player
+from player import Player, new_player
 from grid import Grid
 class connect4: 
-    def __init__(self, bot=0, status = 1):
-        self
-        self.bot = bot
+    def __init__(self,status = 1):
         self.status = status
-        self.grid= None,
+        self.grid= None
+        self.player = [],
 
     def __str__(self):
         return f"Connect4(bot={self.bot}, status={self.status})"
 
 
-    def _launch_grid():
-        grid = Grid.new_grid()
+    def _launch_grid(self):
+        try:
+            self.grid = Grid.new_grid()
+        except: 
+            print("Grid initialization has failed")
         
-    
+        
+    def _addPlayer (self, name, color):
+        if not self.player[0] : 
+            self.player[0] = new_player(name,color)
+        elif not self.player[1] : 
+            self.player[1] = new_player(name,color)
+        else :
+            raise "Both player slots are already filed, please delete a player"
+        
     def launch(self):
         print("Launching the game of connect 4...")
         self._launch_grid()
+
         
