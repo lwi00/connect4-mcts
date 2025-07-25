@@ -1,8 +1,8 @@
 class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
-        self.previous = None
+    def __init__(self, state):
+        self.state = state
+        self.children = []
+        self.parent = None
         self.is_leaf = False
         self.is_root = False
         self.total_weight = 0
@@ -11,8 +11,10 @@ class Node:
         self.total_draw = 0
 
     def __str__(self):
-        return f"Node(value={self.value})"
-    def explore(self):
+        return f"Node(state={self.state})"
+    def expand(self):
+        pass
+    def back_propagate(self, result):
         pass
 
 class CurrentNode(Node):
