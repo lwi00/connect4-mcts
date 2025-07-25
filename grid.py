@@ -21,3 +21,42 @@ class Grid :
                 return True
         
         raise ValueError("Column is full")
+    
+    def is_full(self):
+        return all(cell != 0 for row in self.grid for cell in row)
+    
+    def is_winner(self, piece):
+        # Check horizontal
+        for row in range(self.rows):
+            for col in range(self.columns - 3):
+                if all(self.grid[row][col + i] == piece for i in range(4)):
+                    return True
+                
+        # Check vertical
+        for row in range(self.rows - 3):
+            for col in range(self.columns):
+                if all(self.grid[row + i][col] == piece for i in range(4)):
+                    return True
+                    
+        # Check diagonal (down-right)
+        for row in range(self.rows - 3):
+            for col in range(self.columns - 3):
+                if all(self.grid[row + i][col + i] == piece for i in range(4)):
+                    return True
+                    
+        # Check diagonal (down-left)
+        for row in range(self.rows - 3):
+            for col in range(3, self.columns):
+                if all(self.grid[row + i][col - i] == piece for i in range(4)):
+                    return True
+                    
+        return False
+    
+    def is_draw(self):
+        return self.is_full() and not self.is_winner(1) and not self.is_winner(2)
+    
+    def is_game_over(self):
+        return self.is_winner(1) or self.is_winner(2) or self.is_draw()
+    
+    def get_valid_moves(self):
+        return [i for i in range(self.columns) if self.grid[0][i] == 0]
