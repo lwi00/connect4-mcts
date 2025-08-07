@@ -1,3 +1,5 @@
+from mcts import get_best_move
+
 class Player:
     def __init__(self, name, color):
         self.name = name
@@ -22,11 +24,13 @@ class HumanPlayer(Player):
                 print("Invalid input. Please enter a number.")
 
 class BotPlayer(Player):
-    def __init__(self, name, color):
+    def __init__(self, name, color, iterations=1000):
         super().__init__(name, color)
+        self.iterations = iterations
     
     def play(self, grid):
-        # Placeholder for AI logic
-        # For now, just pick the first valid move
-        return grid.get_valid_moves()[0]
+        print(f"{self.name} ({self.color}) is thinking...")
+        best_move = get_best_move(grid, self.iterations)
+        print(f"{self.name} chooses column {best_move}")
+        return best_move
     

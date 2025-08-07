@@ -3,6 +3,7 @@ class Grid :
         self.rows = rows
         self.columns = columns
         self.grid = [[0 for _ in range(columns)] for _ in range(rows)]
+        self.current_player_idx = 0  # 0 for player 1, 1 for player 2
 
     def new_grid():
         return Grid()
@@ -18,9 +19,19 @@ class Grid :
         for row in reversed(range(self.rows)):
             if self.grid[row][column] == 0:
                 self.grid[row][column] = piece
+                # Switch to next player
+                self.current_player_idx = 1 - self.current_player_idx
                 return True
         
         raise ValueError("Column is full")
+    
+    def get_current_player(self):
+        """Returns the current player number (1 or 2)"""
+        return self.current_player_idx + 1
+    
+    def set_current_player(self, player_idx):
+        """Set the current player (0 for player 1, 1 for player 2)"""
+        self.current_player_idx = player_idx
     
     def is_full(self):
         return all(cell != 0 for row in self.grid for cell in row)
