@@ -157,7 +157,7 @@ self._addPlayer("AI", 'yellow', is_bot=True, iterations=5000)   # Hard
 Edit `grid.py`:
 
 ```python
-# Line 2
+# Edit default parameters in Grid.__init__() method (line 2)
 def __init__(self, rows=6, columns=7):  # Change dimensions here
 ```
 
